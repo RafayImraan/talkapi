@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export default function SessionHistory({ onClose }) {
   const [history, setHistory] = useState([]);
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    fetch("/api/session-history")
+    fetch(`${API_URL}/api/session-history`)
       .then((r) => r.json())
       .then(setHistory)
       .catch(() => {});
-    fetch("/api/stats")
+    fetch(`${API_URL}/api/stats`)
       .then((r) => r.json())
       .then(setStats)
       .catch(() => {});

@@ -7,6 +7,8 @@ import ThemeToggle from "./components/ThemeToggle";
 import SessionHistory from "./components/SessionHistory";
 import "./App.css";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export default function App() {
   const [status, setStatus] = useState("disconnected");
   const [events, setEvents] = useState([]);
@@ -77,7 +79,7 @@ export default function App() {
     setLiveText("");
 
     try {
-      const tokenRes = await fetch("/api/voice-token");
+      const tokenRes = await fetch(`${API_URL}/api/voice-token`);
       const tokenData = await tokenRes.json();
       if (tokenData.error) {
         addEvent({ type: "error", message: tokenData.error });
@@ -86,7 +88,7 @@ export default function App() {
       }
       const { token } = tokenData;
 
-      const agentRes = await fetch("/api/agent-config");
+      const agentRes = await fetch(`${API_URL}/api/agent-config`);
       const agentConfig = await agentRes.json();
 
       const wsUrl = new URL("wss://agents.assemblyai.com/v1/ws");
@@ -262,7 +264,7 @@ export default function App() {
             });
 
             try {
-              const res = await fetch("/api/execute-tool", {
+              const res = await fetch(`${API_URL}/api/execute-tool`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name: msg.name, arguments: msg.arguments }),
@@ -274,7 +276,7 @@ export default function App() {
 
               // Progressive tool reveal: unlock more tools after successful calls
               toolCallCountRef.current++;
-              const tiersRes = await fetch("/api/tool-tiers");
+              const tiersRes = await fetch(`${API_URL}/api/tool-tiers`);
               const tiers = await tiersRes.json();
 
               if (toolCallCountRef.current === 1 && toolTierRef.current === 1) {
