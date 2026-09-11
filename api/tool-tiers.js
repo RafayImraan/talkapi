@@ -1,5 +1,4 @@
-const path = require("path");
-const { TIER_1, TIER_2, TIER_3 } = require(path.join(__dirname, "..", "backend", "agent", "toolSchemas"));
+const { TIER_1, TIER_2, TIER_3 } = require("./agent/toolSchemas");
 
 module.exports = (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

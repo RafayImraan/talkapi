@@ -1,5 +1,4 @@
-const path = require("path");
-const { ALL_TOOLS, TIER_1, TIER_2, TIER_3 } = require(path.join(__dirname, "..", "backend", "agent", "toolSchemas"));
+const { ALL_TOOLS, TIER_1, TIER_2, TIER_3 } = require("./agent/toolSchemas");
 
 const SYSTEM_PROMPT = `You are TalkAPI, a multilingual voice-controlled AI assistant with access to real-world APIs and a large knowledge base. You are highly knowledgeable and can answer questions about virtually any topic.
 
