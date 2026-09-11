@@ -1,6 +1,5 @@
 node_modules/
 backend/
-api/
 *.md
 .vercel/
 .git/
