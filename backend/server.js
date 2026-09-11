@@ -194,10 +194,15 @@ app.get("/api/stats", (_req, res) => {
 });
 
 // ─── Start server ─────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`TalkAPI backend running on port ${PORT}`);
-  console.log(`Tools registered (${ALL_TOOLS.length}): ${ALL_TOOLS.map((t) => t.name).join(", ")}`);
-  if (!ASSEMBLYAI_API_KEY) {
-    console.warn("WARNING: ASSEMBLYAI_API_KEY is not set. Voice features will not work.");
-  }
-});
+// For Vercel serverless: export the Express app
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  app.listen(PORT, () => {
+    console.log(`TalkAPI backend running on port ${PORT}`);
+    console.log(`Tools registered (${ALL_TOOLS.length}): ${ALL_TOOLS.map((t) => t.name).join(", ")}`);
+    if (!ASSEMBLYAI_API_KEY) {
+      console.warn("WARNING: ASSEMBLYAI_API_KEY is not set. Voice features will not work.");
+    }
+  });
+}
