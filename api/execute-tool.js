@@ -1,5 +1,5 @@
 const path = require("path");
-const executeTool = require("./agent/toolExecutor");
+const executeTool = require(path.join(__dirname, "..", "backend", "agent", "toolExecutor"));
 
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
