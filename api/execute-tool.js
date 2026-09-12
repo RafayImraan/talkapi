@@ -10,9 +10,7 @@ module.exports = async (req, res) => {
 
   try {
     const { name, arguments: args } = req.body;
-    console.log(`[Tool] Executing: ${name}`, args);
     const result = await executeTool(name, args || {});
-    console.log(`[Tool] Result for ${name}:`, result.success ? "OK" : "ERROR");
     res.json(result);
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
