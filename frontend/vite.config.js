@@ -16,8 +16,5 @@ export default defineConfig({
     emptyOutDir: true
   },
   define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify(
-      process.env.VITE_API_URL || 'http://localhost:5000'
-    )
   }
 })
